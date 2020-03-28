@@ -1,4 +1,5 @@
-const crypto = require('crypto'); //criptografia, mas vai ser utilizado para gerar um texto aleatório para o ID da ong
+//const crypto = require('crypto'); //criptografia, mas vai ser utilizado para gerar um texto aleatório para o ID da ong
+const generateUniqueId = require('../utils/generateUniqueId');
 const connection = require('../database/connection');
 
 
@@ -15,7 +16,10 @@ module.exports = {
         //console.log(data);
 
         //criar o ID da ong: gera 4 bytes de caracteres hexadecimais
-        const id = crypto.randomBytes(4).toString('HEX');
+        //const id = crypto.randomBytes(4).toString('HEX');
+        //vamos fazer isso numa parte separada só para ver como seria fazer um teste unitário, ver na pasta utils tmb
+        const id = generateUniqueId();
+
         //passar os dados para o banco de dados:
         await connection('ongs').insert({
             id,
